@@ -41,6 +41,14 @@ function handleCardClick(card){
     if (lockBoard) return;
     if (card === firstCard) return;
     if (card.classList.contains('matched')) return;
+    if (firstCard === null) {
+        firstcard = card;
+    } else {
+        secondCard = card;
+        lockBoard = true;
+        moves++;
+        checkMatch();
+    }
 }
 
 
