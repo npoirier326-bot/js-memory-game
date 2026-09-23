@@ -9,8 +9,11 @@ let secondCard = null;
 let lockBoard = false;
 let moves= 0;
 let matchedCount = 0;
-let seconds = 0;
+let sec = 0;
 let timerInterval = null;
+const timerDisplay = document.getElementById('timerDisplay');
+const result = document.getElementById('result');
+const movesDisplay = document.getElementById('movesDisplay');
 
 for (let i = 0; i < 8; i++) {
   const url = `https://picsum.photos/${dimension}?random=${imgStart + i}`;
@@ -37,6 +40,7 @@ function initGame(){
         tableauDeJeu.appendChild(card);
         card.addEventListener('click', () => handleCardClick(card))
     })
+    startTimer();
 }
 
 function handleCardClick(card){
@@ -86,6 +90,20 @@ function formatTime(sec) {
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
     return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+function startTimer() {
+    timerInterval = setInterval(() => {
+        sec++;
+        timerDisplay.textContent = formatTime(sec);
+    }, 1000);
+}
+
+function checkVictory(){
+    if (matchedCount === cards.length / 2) {
+        clearInterval(timerInterval);
+        result.textContent = `Félicitations ! Vous avez gagné en ${moves} coups et en ${formatTime(sec)}.`;
+    }
 }
 
 initGame();
