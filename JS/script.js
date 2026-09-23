@@ -9,6 +9,8 @@ let secondCard = null;
 let lockBoard = false;
 let moves= 0;
 let matchedCount = 0;
+let seconds = 0;
+let timerInterval = null;
 
 for (let i = 0; i < 8; i++) {
   const url = `https://picsum.photos/${dimension}?random=${imgStart + i}`;
@@ -41,8 +43,13 @@ function handleCardClick(card){
     if (lockBoard) return;
     if (card === firstCard) return;
     if (card.classList.contains('matched')) return;
+
+    const img = document.createElement('img');
+    img.src = card.dataset.value;
+    card.appendChild(img);
+
     if (firstCard === null) {
-        firstcard = card;
+        firstCard = card;
     } else {
         secondCard = card;
         lockBoard = true;
@@ -51,6 +58,27 @@ function handleCardClick(card){
     }
 }
 
+function checkMatch(){
+    if (firstCard.dataset.value === secondCard.dataset.value) {
+        firstCard.classList.add('matched');
+        secondCard.classList.add('matched');
+        matchedCount++;
+        resetBoard();
+    }
+    else {
+        setTimeout(() => {
+            firstCard.innerHTML = '';
+            secondCard.innerHTML = '';
+            resetBoard();
+        }, 800);
+    }
+}
+
+function resetBoard(){
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+}
 
 initGame();
 
