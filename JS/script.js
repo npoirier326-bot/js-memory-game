@@ -40,7 +40,9 @@ function initGame(){
 function handleCardClick(card){
     if (lockBoard) return;
     if (card === firstCard) return;
+    if (card.classList.contains('matched')) return;
 }
+
 
 initGame();
 
