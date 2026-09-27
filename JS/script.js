@@ -14,6 +14,7 @@ let timerInterval = null;
 const timerDisplay = document.getElementById('timerDisplay');
 const result = document.getElementById('result');
 const movesDisplay = document.getElementById('movesDisplay');
+const restartButton = document.getElementById('restartButton');
 
 for (let i = 0; i < 8; i++) {
   const url = `https://picsum.photos/${dimension}?random=${imgStart + i}`;
@@ -30,6 +31,12 @@ function shuffle(array){
 }
 
 function initGame(){
+    tableauDeJeu.innerHTML = '';
+    result.textContent = '';
+    movesDisplay.textContent = '0 coups';
+    moves = 0;
+    matchedCount = 0;
+    resetBoard();
     shuffle(cards);
     cards.forEach((imgUrl) => {
       const card = document.createElement('div');
@@ -58,6 +65,7 @@ function handleCardClick(card){
         secondCard = card;
         lockBoard = true;
         moves++;
+        movesDisplay.textContent = `${moves} coups`;
         checkMatch();
     }
 }
@@ -68,6 +76,7 @@ function checkMatch(){
         secondCard.classList.add('matched');
         matchedCount++;
         resetBoard();
+        checkVictory();
     }
     else {
         setTimeout(() => {
@@ -93,6 +102,9 @@ function formatTime(sec) {
 }
 
 function startTimer() {
+    clearInterval(timerInterval);
+    sec = 0;
+    timerDisplay.textContent = formatTime(sec);
     timerInterval = setInterval(() => {
         sec++;
         timerDisplay.textContent = formatTime(sec);
@@ -105,6 +117,8 @@ function checkVictory(){
         result.textContent = `Félicitations ! Vous avez gagné en ${moves} coups et en ${formatTime(sec)}.`;
     }
 }
+
+restartButton.addEventListener('click', initGame);
 
 initGame();
 
