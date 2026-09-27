@@ -64,3 +64,13 @@ header h1 {
   font-weight: bold;
   color: #E3243B;
 }
+
+#restartButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #1E3A5F;
+  color: #0A0E27;
+  border: none;
+  cursor: pointer;
+}
