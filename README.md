@@ -23,4 +23,4 @@ Jeu de memory en JavaScript pur : retrouvez les paires d'images cachées parmi u
 
 ## Auteur
 
-Nolan
+Nolan Poirier
