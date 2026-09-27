@@ -2,7 +2,7 @@
 
 Jeu de memory en JavaScript pur : retrouvez les paires d'images cachées parmi un plateau de cartes mélangées.
 
-🔗 [Jouer en ligne]()
+🔗 [Jouer en ligne](https://npoirier326-bot.github.io/js-memory-game/)
 
 ## Technologies
 
